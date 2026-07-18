@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Claude Code per-machine local settings
+.claude/settings.local.json
+
+# ── Personal practice — LOCAL ONLY ─────────────────────────────────────
+# The public repo ships only the reusable study tool (CLAUDE.md, agents,
+# templates, topic-folder skeleton). Everything below stays on your machine.
+
+# every solution file
+*.java
+# per-problem writeups (NNNN-slug.md) inside topic folders
+*/[0-9]*.md
+# progress log
+/PROGRESS.md
+# skill report
+/SKILLS.md
+# personal cheatsheets / notes
+/notes/
+/cheatsheets/
