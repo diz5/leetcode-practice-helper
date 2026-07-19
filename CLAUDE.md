@@ -166,7 +166,10 @@ When I ask a question, structure your **chat reply** with these sections, in ord
 
 1. **Problem restated** — one or two sentences in plain language, plus constraints that matter.
 2. **Brute force idea** — the naive approach and its complexity (even if we won't use it).
-3. **Key insight** — the "aha" that unlocks the optimal solution.
+3. **Key insight** — the "aha" that unlocks the optimal solution. When you're solving something I don't
+   already know, **always illustrate the insight with a small, concrete worked example** (a real input
+   with specific numbers) that makes it click — the example must *show why* the insight holds, not just
+   restate it abstractly.
 4. **Optimal approach (step by step)** — walk the algorithm concretely, ideally with a small example.
 5. **Code** — full Java `Solution`, commented.
 6. **Complexity** — time and space, with a one-line justification for each.

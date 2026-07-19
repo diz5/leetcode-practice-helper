@@ -12,7 +12,8 @@ _Plain-language statement + the constraints that actually matter._
 _The naive approach and its complexity._
 
 ## Key insight
-_The "aha" that unlocks the optimal solution._
+_The "aha" that unlocks the optimal solution — **illustrated with a small, concrete example**
+(a real input with specific numbers) that shows why it holds, especially for a technique I didn't know yet._
 
 ## Optimal approach (step by step)
 1. ...
