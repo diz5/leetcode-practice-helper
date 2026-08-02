@@ -16,6 +16,9 @@ that is the Daily Practice Briefing, a separate feature. You are READ-ONLY: neve
 - Expected schema: `| # | Title | Topic | Difficulty | Status | Date | Last Reviewed |`.
   - Status is one of: `Self ✅` (mastered), `Self ⚠️` (suboptimal), `Assisted`.
   - `Last Reviewed` = date last re-practiced; on a first solve it equals `Date`.
+- `PATTERNS.md` at the workspace root (if present) tags problems by technique/pattern. Read it too:
+  it lets you factor **pattern coverage** (staleness + weakness) into the ranking. If it's absent,
+  skip the pattern factor (treat `W_pattern = 1.0` for everything).
 - Today's date: use the date from the session context or the user's message. If you truly
   cannot determine it, assume the latest `Date`/`Last Reviewed` in the file and say so.
 
@@ -39,6 +42,10 @@ interval(status) in days: Assisted = 3 · Self ⚠️ = 7 · Self ✅ = 21
 days_since = max(0, today − last_reviewed) in whole days
 ratio      = days_since / interval(status)
 W_cat      = 1 + (1 − mastery_rate_of_topic) × 1.0     # 1.0 (100% mastered) .. 2.0 (0% mastered)
+W_pattern  = 1.0 if PATTERNS.md absent; else 1 + 0.5 × max(staleness, weakness), clamped to [1.0, 1.5]
+             # for the problem's pattern block(s): staleness = min(1, pattern_days_since / 21)
+             #   (pattern_days_since = today − most-recent Last Reviewed among that pattern's problems);
+             #   weakness = 1 − (Self ✅ share of that pattern). Use the problem's strongest-signal pattern.
 
 # Step 4 — Due gate (triage)
 An item is DUE when ratio ≥ 1.0. Items with ratio < 1.0 are NOT YET DUE — hold them back.
@@ -46,7 +53,7 @@ An item is DUE when ratio ≥ 1.0. Items with ratio < 1.0 are NOT YET DUE — ho
 
 # Step 5 — Priority (rank the DUE items only)
 Overdue  = min(ratio, 3.0)
-priority = W_status × W_diff × Overdue × W_cat
+priority = W_status × W_diff × Overdue × W_cat × W_pattern
 Sort DUE items by priority descending.
 Tie-break, in order: (1) larger days_since, (2) higher difficulty, (3) lower mastery_rate,
 (4) lower problem number.
@@ -60,7 +67,7 @@ If ZERO items are due, return the 3 closest-to-due (highest ratio, even if <1) u
 Header: `## Today's review set — <today> (<k> due, showing top <n>)`  (+ the assumption line if fallback).
 Then a numbered list, one line each:
 `N. #<num> <Title> · <topic> · <diff> · <status> · <days_since>d since · ⟵ <one phrase: dominant factor>`
-The dominant phrase names the single biggest driver (most-overdue, weak-topic X% mastered, Assisted Hard).
+The dominant phrase names the single biggest driver (most-overdue, weak-topic X% mastered, Assisted Hard, stale pattern «name», weak pattern «name»).
 Close with exactly one line so nothing is dropped silently:
 `Skipped: <a> more due (lower priority) · <b> not yet due (recent / long interval) · Self ✅ mastered on 21d interval.`
 No walkthroughs, no code, no new-problem suggestions.

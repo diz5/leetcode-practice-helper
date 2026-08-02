@@ -59,15 +59,40 @@ re-practice of solved ones, and the **Skill Coach** evaluates and advises. Trigg
 "evaluate my skill" / "how am I doing?" / "am I ready to move on?". It only ever writes `SKILLS.md`
 (never `PROGRESS.md` or solutions).
 
+## 🎯 OA Debrief — a SKILL that turns a real assessment into queued practice
+A skill lives at `.claude/skills/oa-debrief/SKILL.md`. When I describe a real **online assessment**
+(OA / take-home / coding screen) I just took, it maps each remembered question to **LeetCode
+analogues**, dedupes them against `PROGRESS.md`, and appends them to **`notes/oa-practice-backlog.md`**
+as a checkbox queue — plus captures the **format lesson** (e.g. CodeSignal reveals requirements
+level-by-level). Trigger it by saying e.g. "I did an OA yesterday" / "debrief my OA" / "here's what the
+coding test asked". It does **not** solve the queued problems and does **not** touch `PROGRESS.md` —
+nothing is solved yet. Queued problems should surface in the **Daily Briefing** until they land in
+`PROGRESS.md`. **Privacy:** company names, scores, and assessment details go ONLY into the gitignored
+`notes/` and private memory — never into a tracked file.
+
 ## ⚠️ MANDATORY — do not skip, even if I only ask for "the answer"
 Every problem you help with produces **persistent files**, not just a chat reply. After you
 answer, you MUST, in the same turn, without waiting to be asked:
 1. **Write** `topic/NNNN-slug.java` — the solution code.
 2. **Write** `topic/NNNN-slug.md` — the full writeup (from `templates/writeup-template.md`).
 3. **Edit** `PROGRESS.md` — append one row for this problem.
-4. **Confirm** at the end of your reply which files you created/updated.
+4. **Edit** `PATTERNS.md` — tag this problem (its number + status) under its underlying pattern(s); create a new pattern block if none fits (see the Pattern catalog section).
+5. **Confirm** at the end of your reply which files you created/updated.
 A chat-only answer is an INCOMPLETE answer. If you find yourself about to end the turn without
 having called Write/Edit, stop and do the saves first.
+
+## 🧩 Pattern catalog (`PATTERNS.md`) — technique tags for smarter review
+Beyond the topic folder, every solved problem is ALSO tagged by its underlying **technique/pattern**
+in `PATTERNS.md` — a catalog where each pattern block has a *Tell* (how to recognize it), the key
+idea, the solved problems under it (with status), and canonical **follow-ups**. This is the source
+for **pattern-aware review**.
+- **On every solve** (step 4 of the MANDATORY save): add the problem's number + status under the
+  matching pattern block(s), creating a new block if none fits. A problem may sit under several
+  patterns; its *primary* is where the optimal solution's core idea lives.
+- The **Daily Briefing** and **review-planner** use `PATTERNS.md` to factor **pattern coverage** into
+  recommendations: prefer surfacing patterns that are **stale** (not practiced recently) or **weak**
+  (mostly `Assisted`, few `Self ✅`). When the Briefing recommends brand-new problems, it may lean
+  toward a stale/weak pattern's follow-ups.
 
 ## Solution language
 - **Java**, always. Use idiomatic, clean, interview-ready Java.
