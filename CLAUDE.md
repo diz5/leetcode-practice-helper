@@ -52,8 +52,13 @@ main session when a review is actually completed (see Conventions).
 ## 📊 Skill Coach — a SEPARATE subagent that evaluates my skill (NOT the Briefing / planner)
 A custom subagent lives at `.claude/agents/skill-coach.md`. It assesses **where my skill stands** —
 reading `PROGRESS.md` for the quantitative picture (mastery by topic/difficulty, independence rate,
-trend) plus a **spot-read of a few actual solutions** for code-quality evidence — then returns a
-skill scorecard + prioritized advice and appends a dated snapshot to **`SKILLS.md`**. It is the
+trend), **`PATTERNS.md`** for pattern coverage (strong / weak / stale / missing techniques),
+**`notes/oa-practice-backlog.md`** for real timed-assessment evidence, plus a **spot-read of a few
+actual solutions** for code-quality evidence — then returns a skill scorecard + prioritized advice
+and appends a dated snapshot to **`SKILLS.md`**. Its advice separates three failure modes, because
+they need different fixes: **recognition speed** (I know it but can't retrieve it in time →
+timed drills), **coverage** (I genuinely haven't learned it → new problems), and
+**design/architecture** (stateful class design → design reps). It is the
 third distinct tool: the **Daily Briefing** recommends brand-NEW problems, **review-planner** schedules
 re-practice of solved ones, and the **Skill Coach** evaluates and advises. Trigger it by asking e.g.
 "evaluate my skill" / "how am I doing?" / "am I ready to move on?". It only ever writes `SKILLS.md`
